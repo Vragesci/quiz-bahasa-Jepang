@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Bahasa Jepang - Lingkungan Sekolah</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .quiz-content {
+            padding: 40px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .question-image {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+        }
+
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            color: #1976D2;
+        }
+
+        .option.correct {
+            background: #e8f5e8;
+            border-color: #4CAF50;
+            color: #2E7D32;
+        }
+
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .option-letter {
+            background: #2196F3;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        .feedback {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .excellent { background: #e8f5e8; color: #2E7D32; }
+        .good { background: #fff3e0; color: #ef6c00; }
+        .needs-improvement { background: #ffebee; color: #c62828; }
+
+        .start-screen {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .start-screen h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .start-screen p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            list-style-position: inside;
+            color: #666;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+            
+            .question {
+                font-size: 1.2em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏫 Quiz Bahasa Jepang</h1>
+            <p>Lingkungan Sekolah (学校環境)</p>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="start-screen">
+            <h2>Selamat Datang!</h2>
+            <p>Quiz ini akan menguji pengetahuan Anda tentang kosakata dan pola kalimat bahasa Jepang yang berkaitan dengan lingkungan sekolah.</p>
+            
+            <div class="instructions">
+                <h3>📋 Petunjuk:</h3>
+                <ul>
+                    <li>Quiz terdiri dari 20 pertanyaan</li>
+                    <li>Setiap pertanyaan memiliki 4 pilihan jawaban (A, B, C, D)</li>
+                    <li>Klik pada jawaban yang Anda anggap benar</li>
+                    <li>Anda dapat melihat skor akhir di akhir quiz</li>
+                    <li>Tidak ada batasan waktu</li>
+                </ul>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="startQuiz()">Mulai Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="quiz-content hidden">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="question-number"></div>
+                <div class="question" id="question"></div>
+                <img id="question-image" class="question-image hidden" alt="Question Image">
+                
+                <div class="options" id="options"></div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Selanjutnya</button>
+                <button class="btn btn-primary hidden" id="finish-btn" onclick="finishQuiz()">Selesai</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="result-container hidden">
+            <h2>🎉 Quiz Selesai!</h2>
+            <div class="score" id="final-score"></div>
+            <div class="feedback" id="feedback"></div>
+            
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="restartQuiz()">Ulangi Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "これは どこですか？",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e8f5e8'/%3E%3Crect x='50' y='50' width='200' height='100' fill='%23fff' stroke='%23333' stroke-width='2'/%3E%3Crect x='60' y='60' width='40' height='30' fill='%23f44336'/%3E%3Crect x='110' y='60' width='40' height='30' fill='%23f44336'/%3E%3Crect x='160' y='60' width='40' height='30' fill='%23f44336'/%3E%3Crect x='210' y='60' width='30' height='30' fill='%234CAF50'/%3E%3Ctext x='150' y='120' text-anchor='middle' font-family='Arial' font-size='12' fill='%23333'%3ELIBRARY%3C/text%3E%3C/svg%3E",
+                options: ["しょくどう", "としょかん", "りかしつ", "じむしつ"],
+                correct: 1,
+                explanation: "Gambar menunjukkan perpustakaan (としょかん) dengan rak-rak buku."
+            },
+            {
+                question: "きょうしつ に 何 が ありますか？",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e3f2fd'/%3E%3Crect x='50' y='20' width='200' height='80' fill='%232E7D32'/%3E%3Crect x='50' y='120' width='40' height='30' fill='%23ff9800'/%3E%3Crect x='100' y='120' width='40' height='30' fill='%23ff9800'/%3E%3Crect x='150' y='120' width='40' height='30' fill='%23ff9800'/%3E%3Crect x='200' y='120' width='40' height='30' fill='%23ff9800'/%3E%3Crect x='50' y='160' width='15' height='20' fill='%23795548'/%3E%3Crect x='185' y='160' width='15' height='20' fill='%23795548'/%3E%3C/svg%3E",
+                options: ["コンピューター と プリンター", "つくえ と いす", "せんせい と せいと", "テレビ と ほん"],
+                correct: 1,
+                explanation: "Di kelas (きょうしつ) ada meja (つくえ) dan kursi (いす)."
+            },
+            {
+                question: "この人は だれですか？",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23fff3e0'/%3E%3Ccircle cx='150' cy='80' r='25' fill='%23ffcc02'/%3E%3Crect x='125' y='100' width='50' height='60' fill='%232196F3'/%3E%3Crect x='120' y='120' width='60' height='30' fill='%23ff5722'/%3E%3Ctext x='150' y='180' text-anchor='middle' font-family='Arial' font-size='10' fill='%23333'%3ETEACHER%3C/text%3E%3C/svg%3E",
+                options: ["せいと", "きょうし", "じむいん", "けいびいん"],
+                correct: 1,
+                explanation: "Gambar menunjukkan guru (きょうし)."
+            },
+            {
+                question: "ほけんしつ は どこに ありますか？",
+                options: ["がっこう の となり に あります", "がっこう の なか に あります", "がっこう の そと に あります", "がっこう の うえ に あります"],
+                correct: 1,
+                explanation: "UKS (ほけんしつ) ada di dalam sekolah (がっこう の なか に あります)."
+            },
+            {
+                question: "トイレ は がっこう の _______ に あります。",
+                options: ["うえ", "した", "なか", "そと"],
+                correct: 2,
+                explanation: "Toilet ada di dalam sekolah (がっこう の なか に あります)."
+            },
+            {
+                question: "しょくどう で 何を しますか？",
+                options: ["べんきょうします", "たべます", "およぎます", "ねます"],
+                correct: 1,
+                explanation: "Di kantin (しょくどう) kita makan (たべます)."
+            },
+            {
+                question: "としょかん に _______ が あります。",
+                options: ["ほん", "たべもの", "くるま", "ベッド"],
+                correct: 0,
+                explanation: "Di perpustakaan (としょかん) ada buku (ほん)."
+            },
+            {
+                question: "この文を完成させてください: こうちょうしつ に _______ が います。",
+                options: ["ほん", "つくえ", "こうちょう", "くるま"],
+                correct: 2,
+                explanation: "Di ruang kepala sekolah (こうちょうしつ) ada kepala sekolah (こうちょう)."
+            },
+            {
+                question: "たいいくかん で 何を しますか？",
+                options: ["りょうりします", "うんどうします", "えを かきます", "ほんを よみます"],
+                correct: 1,
+                explanation: "Di gedung olahraga (たいいくかん) kita berolahraga (うんどうします)."
+            },
+            {
+                question: "「せいと は きょうしつ の まえ に います」この文の意味は？",
+                options: ["Siswa ada di belakang kelas", "Siswa ada di depan kelas", "Siswa ada di dalam kelas", "Siswa ada di atas kelas"],
+                correct: 1,
+                explanation: "まえ berarti 'depan', jadi siswa ada di depan kelas."
+            },
+            {
+                question: "こうどう は 何をする ところですか？",
+                options: ["およぐ ところです", "はっぴょうする ところです", "りょうりする ところです", "ねる ところです"],
+                correct: 1,
+                explanation: "Aula (こうどう) adalah tempat untuk presentasi/pengumuman (はっぴょうする ところです)."
+            },
+            {
+                question: "アイティしつ に 何 が ありますか？",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e1f5fe'/%3E%3Crect x='50' y='120' width='40' height='30' fill='%23424242'/%3E%3Crect x='100' y='120' width='40' height='30' fill='%23424242'/%3E%3Crect x='150' y='120' width='40' height='30' fill='%23424242'/%3E%3Crect x='200' y='120' width='40' height='30' fill='%23424242'/%3E%3Crect x='60' y='100' width='20' height='15' fill='%232196F3'/%3E%3Crect x='160' y='100' width='20' height='15' fill='%232196F3'/%3E%3Ctext x='150' y='180' text-anchor='middle' font-family='Arial' font-size='10' fill='%23333'%3ECOMPUTER LAB%3C/text%3E%3C/svg%3E",
+                options: ["ほん と えんぴつ", "コンピューター と プリンター", "ベッド と くすり", "たべもの と のみもの"],
+                correct: 1,
+                explanation: "Ruang lab IT (アイティしつ) ada komputer (コンピューター) dan printer (プリンター)."
+            },
+            {
+                question: "けいびいん は どこに いますか？",
+                options: ["しょくどう に います", "けいびしつ に います", "としょかん に います", "りかしつ に います"],
+                correct: 1,
+                explanation: "Satpam (けいびいん) ada di pos satpam (けいびしつ)."
+            },
+            {
+                question: "せいそういん の しごと は 何ですか？",
+                options: ["べんきょうを おしえます", "がっこうを きれいに します", "ほんを かします", "りょうりを つくります"],
+                correct: 1,
+                explanation: "Tugas petugas kebersihan (せいそういん) adalah membersihkan sekolah (がっこうを きれいに します)."
+            },
+            {
+                question: "そうだんしつ で 何を しますか？",
+                options: ["およぎます", "そうだんします", "りょうりします", "うんどうします"],
+                correct: 1,
+                explanation: "Di ruang BK (そうだんしつ) kita berkonsultasi (そうだんします)."
+            },
+            {
+                question: "ちゅうしゃじょう は がっこう の _______ に あります。",
+                options: ["なか", "そと", "うえ", "した"],
+                correct: 1,
+                explanation: "Tempat parkir (ちゅうしゃじょう) biasanya ada di luar sekolah (がっこう の そと に あります)."
+            },
+            {
+                question: "「ロッカー は きょうしつ の うしろ に あります」この文の意味は？",
+                options: ["Loker ada di depan kelas", "Loker ada di belakang kelas", "Loker ada di dalam kelas", "Loker ada di samping kelas"],
+                correct: 1,
+                explanation: "うしろ berarti 'belakang', jadi loker ada di belakang kelas."
+            },
+            {
+                question: "れいはいしつ で 何を しますか？",
+                options: ["いのります", "およぎます", "べんきょうします", "たべます"],
+                correct: 0,
+                explanation: "Di mushola (れいはいしつ) kita berdoa/beribadah (いのります)."
+            },
+            {
+                question: "そうこ に 何 が ありますか？",
+                options: ["せいと", "たべもの", "どうぐ", "ほん"],
+                correct: 2,
+                explanation: "Di gudang (そうこ) ada peralatan/barang (どうぐ)."
+            },
+            {
+                question: "びじゅつしつ で 何を しますか？",
+                options: ["え を かきます", "うたを うたいます", "およぎます", "はしります"],
+                correct: 0,
+                explanation: "Di ruang seni (びじゅつしつ) kita menggambar (え を かきます)."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            
+            // Update progress
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            
+            // Update question number and text
+            document.getElementById('question-number').textContent = `Pertanyaan ${currentQuestion + 1} dari ${questions.length}`;
+            document.getElementById('question').textContent = question.question;
+            
+            // Handle image
+            const imageElement = document.getElementById('question-image');
+            if (question.image) {
+                imageElement.src = question.image;
+                imageElement.classList.remove('hidden');
+            } else {
+                imageElement.classList.add('hidden');
+            }
+            
+            // Create options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div>${option}</div>
+                `;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update buttons
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('finish-btn').classList.toggle('hidden', currentQuestion !== questions.length - 1);
+            
+            // Show previous answer if exists
+            if (userAnswers[currentQuestion] !== undefined) {
+                selectOption(userAnswers[currentQuestion]);
+            }
+        }
+
+        function selectOption(index) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            calculateScore();
+            showResults();
+        }
+
+        function calculateScore() {
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('final-score').textContent = `${score}/${questions.length} (${percentage}%)`;
+            
+            const feedbackElement = document.getElementById('feedback');
+            if (percentage >= 80) {
+                feedbackElement.className = 'feedback excellent';
+                feedbackElement.innerHTML = `
+                    <h3>🌟 Sangat Baik!</h3>
+                    <p>Anda memiliki pemahaman yang sangat baik tentang bahasa Jepang untuk lingkungan sekolah. Pertahankan!</p>
+                `;
+            } else if (percentage >= 60) {
+                feedbackElement.className = 'feedback good';
+                feedbackElement.innerHTML = `
+                    <h3>👍 Baik!</h3>
+                    <p>Pemahaman Anda cukup baik. Terus berlatih untuk meningkatkan kemampuan bahasa Jepang Anda.</p>
+                `;
+            } else {
+                feedbackElement.className = 'feedback needs-improvement';
+                feedbackElement.innerHTML = `
+                    <h3>💪 Perlu Latihan Lebih</h3>
+                    <p>Jangan menyerah! Pelajari kembali materi kosakata dan pola kalimat, lalu coba lagi.</p>
+                `;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            score = 0;
+            
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz is ready to start
+        });
+    </script>
+</body>
+</html>

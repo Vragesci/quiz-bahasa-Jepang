@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Bahasa Jepang - Lingkungan Sekolah</title>
+    <title>Aplikasi Pembelajaran Bahasa Jepang - Lingkungan Sekolah</title>
     <style>
         * {
             margin: 0;
@@ -45,7 +45,7 @@
             opacity: 0.9;
         }
 
-        .quiz-content {
+        .content {
             padding: 40px;
         }
 
@@ -63,6 +63,145 @@
             background: linear-gradient(45deg, #4CAF50, #8BC34A);
             transition: width 0.3s ease;
             border-radius: 4px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .menu-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-card:hover {
+            background: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.2);
+        }
+
+        .menu-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .menu-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .menu-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .kosakata-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #4CAF50;
+        }
+
+        .kosakata-word {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2E7D32;
+            margin: 20px 0;
+        }
+
+        .kosakata-meaning {
+            font-size: 1.5em;
+            color: #666;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .kosakata-category {
+            font-size: 1em;
+            color: #888;
+            background: #e3f2fd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .kosakata-description {
+            font-size: 1em;
+            color: #888;
+            background: #f0f8ff;
+            padding: 10px 16px;
+            border-radius: 15px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .kosakata-image {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+
+        .kosakata-image.loaded {
+            font-size: initial;
+        }
+
+        .pola-content {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .pola-content h3 {
+            color: #2196F3;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .pola-content .example {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+
+        .pola-content .japanese {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 5px;
+        }
+
+        .pola-content .meaning {
+            color: #666;
+            font-style: italic;
         }
 
         .question-container {
@@ -121,18 +260,6 @@
             background: #e3f2fd;
             border-color: #2196F3;
             color: #1976D2;
-        }
-
-        .option.correct {
-            background: #e8f5e8;
-            border-color: #4CAF50;
-            color: #2E7D32;
-        }
-
-        .option.incorrect {
-            background: #ffebee;
-            border-color: #f44336;
-            color: #c62828;
         }
 
         .option-letter {
@@ -217,46 +344,6 @@
         .good { background: #fff3e0; color: #ef6c00; }
         .needs-improvement { background: #ffebee; color: #c62828; }
 
-        .start-screen {
-            text-align: center;
-            padding: 60px 40px;
-        }
-
-        .start-screen h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .start-screen p {
-            font-size: 1.1em;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .instructions {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .instructions h3 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .instructions ul {
-            list-style-position: inside;
-            color: #666;
-        }
-
-        .instructions li {
-            margin: 8px 0;
-        }
-
         .hidden {
             display: none;
         }
@@ -275,7 +362,7 @@
                 font-size: 2em;
             }
             
-            .quiz-content {
+            .content {
                 padding: 20px;
             }
             
@@ -292,39 +379,91 @@
                 width: 100%;
                 max-width: 200px;
             }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏫 Quiz Bahasa Jepang</h1>
+            <h1>🏫 Aplikasi Pembelajaran Bahasa Jepang</h1>
             <p>Lingkungan Sekolah (学校環境)</p>
         </div>
 
-        <!-- Start Screen -->
-        <div id="start-screen" class="start-screen">
-            <h2>Selamat Datang!</h2>
-            <p>Quiz ini akan menguji pengetahuan Anda tentang kosakata dan pola kalimat bahasa Jepang yang berkaitan dengan lingkungan sekolah.</p>
+        <!-- Main Menu Screen -->
+        <div id="main-menu" class="content">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Ayo Belajar Lingkungan Sekolah dalam Bahasa Jepang!</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Pilih menu pembelajaran yang ingin Anda pelajari:</p>
             
-            <div class="instructions">
-                <h3>📋 Petunjuk:</h3>
-                <ul>
-                    <li>Quiz terdiri dari 20 pertanyaan</li>
-                    <li>Setiap pertanyaan memiliki 4 pilihan jawaban (A, B, C, D)</li>
-                    <li>Klik pada jawaban yang Anda anggap benar</li>
-                    <li>Anda dapat melihat skor akhir di akhir quiz</li>
-                    <li>Tidak ada batasan waktu</li>
-                </ul>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="showKosakata()">
+                    <div class="menu-icon">📚</div>
+                    <h3>Kosakata (語彙)</h3>
+                    <p>Pelajari 58 kosakata lengkap: ruangan, orang, dan posisi di sekolah</p>
+                </div>
+                
+                <div class="menu-card" onclick="showPolaKalimat()">
+                    <div class="menu-icon">💬</div>
+                    <h3>Pola Kalimat (文型)</h3>
+                    <p>Pelajari pola kalimat lokasi dan keberadaan dengan contoh praktis</p>
+                </div>
+                
+                <div class="menu-card" onclick="showQuiz()">
+                    <div class="menu-icon">✏️</div>
+                    <h3>Latihan Soal (練習問題)</h3>
+                    <p>Uji pemahaman dengan 30 soal interaktif dengan gambar asli</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kosakata Screen -->
+        <div id="kosakata-screen" class="content hidden">
+            <div class="progress-bar">
+                <div class="progress" id="kosakata-progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="kosakata-number"></div>
+                
+                <div class="kosakata-card">
+                    <div class="kosakata-category" id="kosakata-category"></div>
+                    <div class="kosakata-image" id="kosakata-image">🏫</div>
+                    <div class="kosakata-word" id="kosakata-word"></div>
+                    <div class="kosakata-meaning" id="kosakata-meaning"></div>
+                    <div class="kosakata-description" id="kosakata-description"></div>
+                </div>
             </div>
             
             <div class="buttons">
-                <button class="btn btn-primary" onclick="startQuiz()">Mulai Quiz</button>
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
+                <button class="btn btn-secondary" id="prev-kosakata" onclick="previousKosakata()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-kosakata" onclick="nextKosakata()">Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Pola Kalimat Screen -->
+        <div id="pola-screen" class="content hidden">
+            <div class="progress-bar">
+                <div class="progress" id="pola-progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="pola-number"></div>
+                <div class="pola-content" id="pola-content"></div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
+                <button class="btn btn-secondary" id="prev-pola" onclick="previousPola()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-pola" onclick="nextPola()">Selanjutnya</button>
             </div>
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-screen" class="quiz-content hidden">
+        <div id="quiz-screen" class="content hidden">
             <div class="progress-bar">
                 <div class="progress" id="progress"></div>
             </div>
@@ -345,18 +484,164 @@
         </div>
 
         <!-- Result Screen -->
-        <div id="result-screen" class="result-container hidden">
+        <div id="result-screen" class="content result-container hidden">
             <h2>🎉 Quiz Selesai!</h2>
             <div class="score" id="final-score"></div>
             <div class="feedback" id="feedback"></div>
             
             <div class="buttons">
                 <button class="btn btn-primary" onclick="restartQuiz()">Ulangi Quiz</button>
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Complete kosakata dengan emoji untuk module belajar (58 total)
+        const kosakata = [
+            // KB Ruangan (28 kata) - dengan emoji yang clear
+            { word: "じむしつ", meaning: "Ruang Tata Usaha", category: "Ruangan", icon: "📋📊", description: "Ruang administrasi sekolah" },
+            { word: "きょうしつ", meaning: "Ruang Kelas", category: "Ruangan", icon: "🏫📚", description: "Tempat belajar siswa" },
+            { word: "しょくどう", meaning: "Kantin", category: "Ruangan", icon: "🍽️🥘", description: "Tempat makan di sekolah" },
+            { word: "しょくいんしつ", meaning: "Ruang Guru", category: "Ruangan", icon: "🏠👩‍🏫", description: "Ruang istirahat guru" },
+            { word: "こうちょうしつ", meaning: "Ruang Kepala Sekolah", category: "Ruangan", icon: "🏢👔", description: "Kantor kepala sekolah" },
+            { word: "ほけんしつ", meaning: "Ruang UKS", category: "Ruangan", icon: "⚕️🩹", description: "Ruang kesehatan sekolah" },
+            { word: "としょかん", meaning: "Perpustakaan", category: "Ruangan", icon: "📚📖", description: "Tempat menyimpan buku" },
+            { word: "そうだんしつ", meaning: "Ruang BK", category: "Ruangan", icon: "💬🗨️", description: "Ruang bimbingan konseling" },
+            { word: "りかしつ", meaning: "Lab IPA", category: "Ruangan", icon: "🧪⚗️", description: "Laboratory sains" },
+            { word: "びじゅつしつ", meaning: "Ruang Seni", category: "Ruangan", icon: "🎨🖌️", description: "Ruang pelajaran seni" },
+            { word: "こうどう", meaning: "Aula", category: "Ruangan", icon: "🎤🎭", description: "Ruang pertemuan besar" },
+            { word: "トイレ", meaning: "Toilet", category: "Ruangan", icon: "🚽🧼", description: "Kamar mandi/WC" },
+            { word: "こうえん", meaning: "Taman", category: "Ruangan", icon: "🌳🌺", description: "Area hijau sekolah" },
+            { word: "かいぎしつ", meaning: "Ruang Rapat", category: "Ruangan", icon: "🏢💺", description: "Ruang pertemuan kecil" },
+            { word: "にわ", meaning: "Halaman", category: "Ruangan", icon: "🌱☀️", description: "Area terbuka sekolah" },
+            { word: "ちゅうしゃじょう", meaning: "Tempat Parkir", category: "Ruangan", icon: "🚗🏁", description: "Area parkir kendaraan" },
+            { word: "もん", meaning: "Gerbang", category: "Ruangan", icon: "🚪🏫", description: "Pintu masuk sekolah" },
+            { word: "アイティしつ", meaning: "Lab Komputer", category: "Ruangan", icon: "💻⌨️", description: "Ruang komputer" },
+            { word: "うんどうじょう", meaning: "Lapangan Olahraga", category: "Ruangan", icon: "⚽🏃", description: "Area olahraga outdoor" },
+            { word: "れいはいしつ", meaning: "Musholah", category: "Ruangan", icon: "🕌🤲", description: "Tempat ibadah Islam" },
+            { word: "そうこ", meaning: "Gudang", category: "Ruangan", icon: "📦🗃️", description: "Tempat penyimpanan barang" },
+            { word: "ロッカー", meaning: "Loker", category: "Ruangan", icon: "🗄️🔐", description: "Lemari penyimpanan siswa" },
+            { word: "けいびしつ", meaning: "Pos Satpam", category: "Ruangan", icon: "🛡️🏠", description: "Pos keamanan sekolah" },
+            { word: "ぶかつどうしつ", meaning: "Ruang Ekstrakurikuler", category: "Ruangan", icon: "🎭🎪", description: "Ruang kegiatan siswa" },
+            { word: "コンピュータールーム", meaning: "Ruang Komputer", category: "Ruangan", icon: "🖥️💾", description: "Lab teknologi informasi" },
+            { word: "たいいくかん", meaning: "Gedung Olahraga", category: "Ruangan", icon: "🏀🏃‍♂️", description: "Gym sekolah indoor" },
+            { word: "さぎょうば", meaning: "Workshop", category: "Ruangan", icon: "🔧⚒️", description: "Ruang praktik kerja" },
+            { word: "ろうか", meaning: "Koridor", category: "Ruangan", icon: "🚶‍♂️➡️", description: "Lorong penghubung ruangan" },
+
+            // KB Orang (15 kata)
+            { word: "こうちょう", meaning: "Kepala Sekolah", category: "Orang", icon: "👨‍💼🎓", description: "Pemimpin sekolah" },
+            { word: "きょうとうせんせい", meaning: "Wakil Kepala Sekolah", category: "Orang", icon: "👩‍💼📋", description: "Wakil pemimpin sekolah" },
+            { word: "きょうし", meaning: "Guru", category: "Orang", icon: "👨‍🏫📚", description: "Pengajar di sekolah" },
+            { word: "じむいん", meaning: "Staff TU", category: "Orang", icon: "👩‍💻📄", description: "Petugas administrasi" },
+            { word: "せいと", meaning: "Siswa", category: "Orang", icon: "👨‍🎓📖", description: "Pelajar di sekolah" },
+            { word: "せいそういん", meaning: "Petugas Kebersihan", category: "Orang", icon: "🧹🧽", description: "Pembersih sekolah" },
+            { word: "けいびいん", meaning: "Satpam", category: "Orang", icon: "👮‍♂️🛡️", description: "Petugas keamanan" },
+            { word: "カウンセリングきょうし", meaning: "Guru BK", category: "Orang", icon: "🗣️💭", description: "Konselor sekolah" },
+            { word: "たんにんきょうし", meaning: "Wali Kelas", category: "Orang", icon: "👨‍🏫📝", description: "Guru pembimbing kelas" },
+            { word: "せんもんきょうし", meaning: "Guru Mata Pelajaran", category: "Orang", icon: "📖🔬", description: "Guru bidang studi" },
+            { word: "かいけいたんとう", meaning: "Bagian Keuangan", category: "Orang", icon: "💰💳", description: "Petugas keuangan" },
+            { word: "せいとかいかいちょう", meaning: "Ketua OSIS", category: "Orang", icon: "🎖️👨‍🎓", description: "Pemimpin organisasi siswa" },
+            { word: "せいとかいやくいん", meaning: "Pengurus OSIS", category: "Orang", icon: "👥📋", description: "Anggota organisasi siswa" },
+            { word: "がっきゅうだいひょうかい", meaning: "Ketua Kelas", category: "Orang", icon: "📋👨‍🎓", description: "Pemimpin kelas" },
+            { word: "しゅうしょくしえん", meaning: "Pembimbing Karir", category: "Orang", icon: "💼🎯", description: "Konselor karir" },
+
+            // KB Posisi (15 kata)
+            { word: "うえ", meaning: "Atas", category: "Posisi", icon: "⬆️🔝", description: "Bagian atas/di atas" },
+            { word: "となり", meaning: "Sebelah", category: "Posisi", icon: "↔️👫", description: "Di samping/bersebelahan" },
+            { word: "した", meaning: "Bawah", category: "Posisi", icon: "⬇️🔻", description: "Bagian bawah/di bawah" },
+            { word: "まなか", meaning: "Tengah", category: "Posisi", icon: "🎯⭕", description: "Di bagian tengah" },
+            { word: "ひだり", meaning: "Kiri", category: "Posisi", icon: "⬅️👈", description: "Arah/sisi kiri" },
+            { word: "そと", meaning: "Luar", category: "Posisi", icon: "🌍🚪", description: "Di bagian luar" },
+            { word: "みぎ", meaning: "Kanan", category: "Posisi", icon: "➡️👉", description: "Arah/sisi kanan" },
+            { word: "なか", meaning: "Dalam", category: "Posisi", icon: "📦🏠", description: "Di bagian dalam" },
+            { word: "まえ", meaning: "Depan", category: "Posisi", icon: "👀⏩", description: "Bagian depan/di depan" },
+            { word: "むこう", meaning: "Seberang", category: "Posisi", icon: "🌁↔️", description: "Di seberang/sisi lain" },
+            { word: "うしろ", meaning: "Belakang", category: "Posisi", icon: "👤⏪", description: "Bagian belakang/di belakang" },
+            { word: "よこ", meaning: "Samping", category: "Posisi", icon: "↕️📐", description: "Di sisi samping" },
+            { word: "いっかい", meaning: "Lantai 1", category: "Posisi", icon: "1️⃣🏢", description: "Tingkat pertama" },
+            { word: "にかい", meaning: "Lantai 2", category: "Posisi", icon: "2️⃣🏢", description: "Tingkat kedua" },
+            { word: "さんがい", meaning: "Lantai 3", category: "Posisi", icon: "3️⃣🏢", description: "Tingkat ketiga" }
+        ];
+
+        // Pola kalimat sesuai PDF
+        const polaKalimat = [
+            {
+                title: "Pola 1: S に 何 が ありますか？",
+                content: `
+                    <h3>Pola: S に 何 が ありますか？</h3>
+                    <p><strong>Fungsi:</strong> Menanyakan apa yang ada di suatu tempat</p>
+                    
+                    <div class="example">
+                        <div class="japanese">きょうしつ に 何 が ありますか？</div>
+                        <div class="meaning">Apa yang ada di dalam kelas?</div>
+                    </div>
+                    
+                    <p><strong>Jawaban:</strong></p>
+                    <div class="example">
+                        <div class="japanese">つくえ と いす が あります。</div>
+                        <div class="meaning">Ada meja dan kursi.</div>
+                    </div>
+                    
+                    <p><strong>Contoh Lain:</strong></p>
+                    <div class="example">
+                        <div class="japanese">としょかん に 何 が ありますか？</div>
+                        <div class="meaning">Apa yang ada di perpustakaan?</div>
+                    </div>
+                    <div class="example">
+                        <div class="japanese">ほん が あります。</div>
+                        <div class="meaning">Ada buku.</div>
+                    </div>
+                `
+            },
+            {
+                title: "Pola 2: S に KB が います/あります",
+                content: `
+                    <h3>Pola: S に KB が います/あります</h3>
+                    <p><strong>Fungsi:</strong> Menyatakan keberadaan orang/benda di suatu tempat</p>
+                    
+                    <div class="example">
+                        <div class="japanese">きょうしつ に せいと が います。</div>
+                        <div class="meaning">Di kelas ada siswa.</div>
+                    </div>
+                    
+                    <div class="example">
+                        <div class="japanese">こうちょうしつ に こうちょう が います。</div>
+                        <div class="meaning">Di ruang kepala sekolah ada kepala sekolah.</div>
+                    </div>
+                    
+                    <p><strong>Perbedaan います dan あります:</strong></p>
+                    <ul>
+                        <li><strong>います</strong> = untuk orang dan hewan (makhluk hidup)</li>
+                        <li><strong>あります</strong> = untuk benda mati</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Pola 3: S は POSISI に あります/います",
+                content: `
+                    <h3>Pola: S は POSISI に あります/います</h3>
+                    <p><strong>Fungsi:</strong> Menunjukkan letak/posisi suatu benda atau orang</p>
+                    
+                    <div class="example">
+                        <div class="japanese">ロッカー は きょうしつ の うしろ に あります。</div>
+                        <div class="meaning">Loker ada di belakang kelas.</div>
+                    </div>
+                    
+                    <p><strong>Kosakata Posisi:</strong></p>
+                    <div class="example">
+                        <div class="japanese">うえ / した / まえ / うしろ</div>
+                        <div class="meaning">Atas / Bawah / Depan / Belakang</div>
+                    </div>
+                    <div class="example">
+                        <div class="japanese">なか / そと / みぎ / ひだり</div>
+                        <div class="meaning">Dalam / Luar / Kanan / Kiri</div>
+                    </div>
+                `
+            }
+        ];
+
+        // IMPORTANT: PRESERVE existing quiz questions with PNG images that are working!
         const questions = [
             {
                 question: "これは どこですか？",
@@ -379,6 +664,21 @@
                 correct: 1,
                 explanation: "Gambar menunjukkan guru (きょうし)."
             },
+            {
+                question: "アイティしつ に 何 が ありますか？",
+                image: "img/computer_lab.png",
+                options: ["ほん と えんぴつ", "コンピューター と プリンター", "ベッド と くすり", "たべもの と のみもの"],
+                correct: 1,
+                explanation: "Ruang lab IT (アイティしつ) ada komputer (コンピューター) dan printer (プリンター)."
+            },
+            {
+                question: "この場所は何ですか？",
+                image: "img/office.png",
+                options: ["きょうしつ", "じむしつ", "しょくどう", "としょかん"],
+                correct: 1,
+                explanation: "Gambar menunjukkan ruang tata usaha (じむしつ)."
+            },
+            // Additional text-based questions to expand the quiz
             {
                 question: "ほけんしつ は どこに ありますか？",
                 options: ["がっこう の となり に あります", "がっこう の なか に あります", "がっこう の そと に あります", "がっこう の うえ に あります"],
@@ -428,13 +728,6 @@
                 explanation: "Aula (こうどう) adalah tempat untuk presentasi/pengumuman (はっぴょうする ところです)."
             },
             {
-                question: "アイティしつ に 何 が ありますか？",
-                image: "img/computer_lab.png",
-                options: ["ほん と えんぴつ", "コンピューター と プリンター", "ベッド と くすり", "たべもの と のみもの"],
-                correct: 1,
-                explanation: "Ruang lab IT (アイティしつ) ada komputer (コンピューター) dan printer (プリンター)."
-            },
-            {
                 question: "けいびいん は どこに いますか？",
                 options: ["しょくどう に います", "けいびしつ に います", "としょかん に います", "りかしつ に います"],
                 correct: 1,
@@ -481,31 +774,181 @@
                 options: ["え を かきます", "うたを うたいます", "およぎます", "はしります"],
                 correct: 0,
                 explanation: "Di ruang seni (びじゅつしつ) kita menggambar (え を かきます)."
+            },
+            {
+                question: "にかい は どういう意味ですか？",
+                options: ["Lantai 1", "Lantai 2", "Lantai 3", "Basement"],
+                correct: 1,
+                explanation: "にかい berarti lantai 2."
+            },
+            {
+                question: "ぶかつどうしつ は 何をする ところですか？",
+                options: ["べんきょうします", "クラブかつどうします", "りょうりします", "ねます"],
+                correct: 1,
+                explanation: "Ruang ekstrakurikuler (ぶかつどうしつ) untuk kegiatan klub (クラブかつどう)."
+            },
+            {
+                question: "ろうか は どこですか？",
+                options: ["へや の なか", "へや と へや の あいだ", "がっこう の そと", "にわ"],
+                correct: 1,
+                explanation: "Koridor (ろうか) ada di antara ruangan (へや と へや の あいだ)."
+            },
+            {
+                question: "もん は がっこう の どこ に ありますか？",
+                options: ["いりぐち", "なか", "うしろ", "うえ"],
+                correct: 0,
+                explanation: "Gerbang (もん) ada di pintu masuk (いりぐち) sekolah."
+            },
+            {
+                question: "きょうし と せいと は きょうしつ に います。何人いますか？",
+                options: ["ひとり", "ふたり いじょう", "だれも いません", "わかりません"],
+                correct: 1,
+                explanation: "と menghubungkan dua orang, jadi minimal ada 2 orang atau lebih (ふたり いじょう)."
+            },
+            {
+                question: "「としょかん に だれ が いますか？」「だれも いません。」この意味は？",
+                options: ["Ada banyak orang", "Ada satu orang", "Tidak ada siapa-siapa", "Ada guru"],
+                correct: 2,
+                explanation: "だれも いません berarti tidak ada siapa-siapa."
+            },
+            {
+                question: "さぎょうば は 何をする ところですか？",
+                options: ["ものを つくります", "ほんを よみます", "たべます", "ねます"],
+                correct: 0,
+                explanation: "Workshop (さぎょうば) adalah tempat untuk membuat sesuatu (ものを つくります)."
+            },
+            {
+                question: "じむいん の しごと は 何ですか？",
+                options: ["うんどうを おしえます", "じむ の しごと を します", "りょうりを つくります", "そうじを します"],
+                correct: 1,
+                explanation: "Staff TU (じむいん) mengerjakan pekerjaan administrasi (じむ の しごと を します)."
+            },
+            {
+                question: "りかしつ で 何を しますか？",
+                options: ["えを かきます", "じっけんします", "およぎます", "ねます"],
+                correct: 1,
+                explanation: "Di lab IPA (りかしつ) kita melakukan eksperimen (じっけんします)."
             }
         ];
 
+        // Global variables
         let currentQuestion = 0;
         let userAnswers = [];
         let score = 0;
+        let currentKosakata = 0;
+        let currentPola = 0;
 
-        function startQuiz() {
-            document.getElementById('start-screen').classList.add('hidden');
+        // Navigation functions
+        function showKosakata() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('kosakata-screen').classList.remove('hidden');
+            currentKosakata = 0;
+            showKosakataItem();
+        }
+
+        function showPolaKalimat() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('pola-screen').classList.remove('hidden');
+            currentPola = 0;
+            showPolaItem();
+        }
+
+        function showQuiz() {
+            document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
+            currentQuestion = 0;
+            userAnswers = [];
+            score = 0;
             showQuestion();
         }
 
+        function goToMainMenu() {
+            document.getElementById('kosakata-screen').classList.add('hidden');
+            document.getElementById('pola-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('main-menu').classList.remove('hidden');
+        }
+
+        // Kosakata functions
+        function showKosakataItem() {
+            const item = kosakata[currentKosakata];
+            document.getElementById('kosakata-number').textContent = `Kosakata ${currentKosakata + 1} dari ${kosakata.length}`;
+            document.getElementById('kosakata-word').textContent = item.word;
+            document.getElementById('kosakata-meaning').textContent = item.meaning;
+            document.getElementById('kosakata-category').textContent = item.category;
+            document.getElementById('kosakata-description').textContent = item.description;
+            
+            // Use emoji for kosakata module
+            const imageElement = document.getElementById('kosakata-image');
+            imageElement.innerHTML = item.icon;
+            imageElement.classList.remove('loaded');
+            
+            const progress = ((currentKosakata + 1) / kosakata.length) * 100;
+            document.getElementById('kosakata-progress').style.width = progress + '%';
+            
+            document.getElementById('prev-kosakata').disabled = currentKosakata === 0;
+            document.getElementById('next-kosakata').textContent = currentKosakata === kosakata.length - 1 ? 'Selesai' : 'Selanjutnya';
+        }
+
+        function nextKosakata() {
+            if (currentKosakata < kosakata.length - 1) {
+                currentKosakata++;
+                showKosakataItem();
+            } else {
+                goToMainMenu();
+            }
+        }
+
+        function previousKosakata() {
+            if (currentKosakata > 0) {
+                currentKosakata--;
+                showKosakataItem();
+            }
+        }
+
+        // Pola Kalimat functions
+        function showPolaItem() {
+            const item = polaKalimat[currentPola];
+            document.getElementById('pola-number').textContent = `Pola ${currentPola + 1} dari ${polaKalimat.length}`;
+            document.getElementById('pola-content').innerHTML = item.content;
+            
+            const progress = ((currentPola + 1) / polaKalimat.length) * 100;
+            document.getElementById('pola-progress').style.width = progress + '%';
+            
+            document.getElementById('prev-pola').disabled = currentPola === 0;
+            document.getElementById('next-pola').textContent = currentPola === polaKalimat.length - 1 ? 'Selesai' : 'Selanjutnya';
+        }
+
+        function nextPola() {
+            if (currentPola < polaKalimat.length - 1) {
+                currentPola++;
+                showPolaItem();
+            } else {
+                goToMainMenu();
+            }
+        }
+
+        function previousPola() {
+            if (currentPola > 0) {
+                currentPola--;
+                showPolaItem();
+            }
+        }
+
+        // Quiz functions - PRESERVE existing PNG functionality
         function showQuestion() {
             const question = questions[currentQuestion];
             
             // Update progress
-            const progress = ((currentQuestion) / questions.length) * 100;
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
             document.getElementById('progress').style.width = progress + '%';
             
             // Update question number and text
             document.getElementById('question-number').textContent = `Pertanyaan ${currentQuestion + 1} dari ${questions.length}`;
             document.getElementById('question').textContent = question.question;
             
-            // Handle image
+            // Handle image - PRESERVE existing PNG functionality
             const imageElement = document.getElementById('question-image');
             if (question.image) {
                 imageElement.src = question.image;
@@ -533,6 +976,9 @@
             document.getElementById('prev-btn').disabled = currentQuestion === 0;
             document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
             document.getElementById('finish-btn').classList.toggle('hidden', currentQuestion !== questions.length - 1);
+            
+            // Reset next button
+            document.getElementById('next-btn').disabled = true;
             
             // Show previous answer if exists
             if (userAnswers[currentQuestion] !== undefined) {
@@ -585,23 +1031,23 @@
             document.getElementById('final-score').textContent = `${score}/${questions.length} (${percentage}%)`;
             
             const feedbackElement = document.getElementById('feedback');
-            if (percentage >= 80) {
+            if (percentage >= 85) {
                 feedbackElement.className = 'feedback excellent';
                 feedbackElement.innerHTML = `
-                    <h3>🌟 Sangat Baik!</h3>
-                    <p>Anda memiliki pemahaman yang sangat baik tentang bahasa Jepang untuk lingkungan sekolah. Pertahankan!</p>
+                    <h3>🌟 Sangat Baik Sekali!</h3>
+                    <p>Anda memiliki pemahaman yang luar biasa tentang bahasa Jepang untuk lingkungan sekolah. Pertahankan prestasi ini!</p>
                 `;
-            } else if (percentage >= 60) {
+            } else if (percentage >= 70) {
                 feedbackElement.className = 'feedback good';
                 feedbackElement.innerHTML = `
                     <h3>👍 Baik!</h3>
-                    <p>Pemahaman Anda cukup baik. Terus berlatih untuk meningkatkan kemampuan bahasa Jepang Anda.</p>
+                    <p>Pemahaman Anda sudah cukup baik. Terus berlatih kosakata dan pola kalimat untuk meningkatkan kemampuan.</p>
                 `;
             } else {
                 feedbackElement.className = 'feedback needs-improvement';
                 feedbackElement.innerHTML = `
                     <h3>💪 Perlu Latihan Lebih</h3>
-                    <p>Jangan menyerah! Pelajari kembali materi kosakata dan pola kalimat, lalu coba lagi.</p>
+                    <p>Jangan menyerah! Pelajari kembali materi kosakata dan pola kalimat, lalu coba lagi. Anda pasti bisa!</p>
                 `;
             }
         }
@@ -612,12 +1058,17 @@
             score = 0;
             
             document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('start-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
         }
 
-        // Initialize quiz
+        // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
-            // Quiz is ready to start
+            console.log('✅ Aplikasi Pembelajaran Bahasa Jepang siap digunakan!');
+            console.log(`📚 Total Kosakata: ${kosakata.length}`);
+            console.log(`💬 Total Pola Kalimat: ${polaKalimat.length}`);
+            console.log(`✏️ Total Soal Quiz: ${questions.length}`);
+            console.log('🖼️ PNG Images preserved for quiz questions!');
         });
     </script>
 </body>

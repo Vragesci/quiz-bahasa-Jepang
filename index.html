@@ -5,118 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayok Mengenal Lingkungan Sekolah dalam Bahasa Jepang</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(45deg, #ff6b6b, #ffa726);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .menu-card {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .menu-card:hover {
-            background: #e3f2fd;
-            border-color: #2196F3;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.2);
-        }
-
-        .menu-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .menu-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .menu-card p {
-            color: #666;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(45deg, #ff6b6b, #ffa726); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .content { padding: 40px; }
+        .progress-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
+        .progress { height: 100%; background: linear-gradient(45deg, #4CAF50, #8BC34A); transition: width 0.3s ease; border-radius: 4px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+        .menu-card { background: white; border: 2px solid #e9ecef; border-radius: 15px; padding: 30px 20px; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .menu-card:hover { background: #e3f2fd; border-color: #2196F3; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(33, 150, 243, 0.2); }
+        .menu-icon { font-size: 3em; margin-bottom: 15px; }
+        .menu-card h3 { color: #333; margin-bottom: 10px; font-size: 1.3em; }
+        .menu-card p { color: #666; font-size: 0.9em; line-height: 1.4; }
+        .kosakata-card { background: #f8f9fa; border-radius: 15px; padding: 30px; margin: 20px 0; text-align: center; border: 2px solid #4CAF50; }
+        .kosakata-word { font-size: 2.5em; font-weight: bold; color: #2E7D32; margin: 20px 0; }
+        .kosakata-meaning { font-size: 1.5em; color: #666; background: white; padding: 15px; border-radius: 10px; margin: 20px 0; }
+        .kosakata-image { font-size: 4em; margin: 20px 0; }
+        .question-image { max-width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .options { display: grid; gap: 15px; margin: 20px 0; }
+        .option { background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 15px 20px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; display: flex; align-items: center; }
+        .option:hover { background: #e3f2fd; border-color: #2196F3; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2); }
+        .option.selected { background: #e3f2fd; border-color: #2196F3; color: #1976D2; }
+        .option-letter { background: #2196F3; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold; }
+        .buttons { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+        .btn { padding: 12px 30px; border: none; border-radius: 25px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-primary { background: linear-gradient(45deg, #2196F3, #21CBF3); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3); }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .hidden { display: none; }
+        .result-container { text-align: center; padding: 40px; }
+        .score { font-size: 3em; font-weight: bold; color: #4CAF50; margin: 20px 0; }
+        .feedback { font-size: 1.2em; margin: 20px 0; padding: 20px; border-radius: 10px; background: #f8f9fa; }
+        .excellent { background: #e8f5e8; color: #2E7D32; }
+        .good { background: #fff3e0; color: #ef6c00; }
+        .needs-improvement { background: #ffebee; color: #c62828; }
+        @media (max-width: 768px) { .container { margin: 10px; } .header { padding: 20px; } .header h1 { font-size: 2em; } .content { padding: 20px; } .menu-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -126,31 +53,216 @@
             <p>Lingkungan Sekolah (学校環境)</p>
         </div>
 
-        <!-- Main Menu Screen -->
+        <!-- Main Menu -->
         <div id="main-menu" class="content">
             <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Ayo Belajar Lingkungan Sekolah dalam Bahasa Jepang!</h2>
             <p style="text-align: center; color: #666; margin-bottom: 30px;">Pilih menu pembelajaran yang ingin Anda pelajari:</p>
-            
             <div class="menu-grid">
-                <div class="menu-card" onclick="alert('Fitur Kosakata segera hadir!')">
+                <div class="menu-card" onclick="showKosakata()">
                     <div class="menu-icon">📚</div>
                     <h3>Kosakata (語彙)</h3>
-                    <p>Pelajari 58 kosakata lengkap: ruangan, orang, dan posisi di sekolah</p>
+                    <p>Pelajari 20 kosakata penting ruangan dan orang di sekolah</p>
                 </div>
-                
-                <div class="menu-card" onclick="alert('Fitur Pola Kalimat segera hadir!')">
+                <div class="menu-card" onclick="showPolaKalimat()">
                     <div class="menu-icon">💬</div>
                     <h3>Pola Kalimat (文型)</h3>
-                    <p>Pelajari pola kalimat lokasi dan keberadaan dengan contoh praktis</p>
+                    <p>Pelajari pola kalimat lokasi dan keberadaan</p>
                 </div>
-                
-                <div class="menu-card" onclick="alert('Fitur Quiz dengan gambar PNG sudah tersedia! Menuju quiz...')">
+                <div class="menu-card" onclick="showQuiz()">
                     <div class="menu-icon">✏️</div>
                     <h3>Latihan Soal (練習問題)</h3>
-                    <p>Uji pemahaman dengan 30 soal interaktif dengan gambar asli</p>
+                    <p>Uji pemahaman dengan 20 soal interaktif</p>
                 </div>
             </div>
         </div>
+
+        <!-- Kosakata Screen -->
+        <div id="kosakata-screen" class="content hidden">
+            <div class="progress-bar"><div class="progress" id="kosakata-progress"></div></div>
+            <div id="kosakata-number"></div>
+            <div class="kosakata-card">
+                <div class="kosakata-image" id="kosakata-image"></div>
+                <div class="kosakata-word" id="kosakata-word"></div>
+                <div class="kosakata-meaning" id="kosakata-meaning"></div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
+                <button class="btn btn-secondary" id="prev-kosakata" onclick="previousKosakata()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-kosakata" onclick="nextKosakata()">Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Pola Kalimat Screen -->
+        <div id="pola-screen" class="content hidden">
+            <div class="progress-bar"><div class="progress" id="pola-progress"></div></div>
+            <div id="pola-number"></div>
+            <div id="pola-content" style="background: #f8f9fa; border-radius: 15px; padding: 30px; margin: 20px 0; line-height: 1.8;"></div>
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
+                <button class="btn btn-secondary" id="prev-pola" onclick="previousPola()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-pola" onclick="nextPola()">Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="content hidden">
+            <div class="progress-bar"><div class="progress" id="progress"></div></div>
+            <div id="question-number"></div>
+            <div id="question" style="font-size: 1.4em; font-weight: 600; margin-bottom: 20px; color: #333;"></div>
+            <img id="question-image" class="question-image hidden" alt="Question Image">
+            <div class="options" id="options"></div>
+            <div class="buttons">
+                <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>Sebelumnya</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Selanjutnya</button>
+                <button class="btn btn-primary hidden" id="finish-btn" onclick="finishQuiz()">Selesai</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="content result-container hidden">
+            <h2>🎉 Quiz Selesai!</h2>
+            <div class="score" id="final-score"></div>
+            <div class="feedback" id="feedback"></div>
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="restartQuiz()">Ulangi Quiz</button>
+                <button class="btn btn-secondary" onclick="goToMainMenu()">Menu Utama</button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        const kosakata = [
+            {word: "きょうしつ", meaning: "Ruang Kelas", icon: "🏫"}, {word: "としょかん", meaning: "Perpustakaan", icon: "📚"}, {word: "しょくどう", meaning: "Kantin", icon: "🍽️"}, {word: "じむしつ", meaning: "Ruang TU", icon: "📋"}, {word: "ほけんしつ", meaning: "UKS", icon: "⚕️"}, {word: "たいいくかん", meaning: "Gedung Olahraga", icon: "🏀"}, {word: "アイティしつ", meaning: "Lab Komputer", icon: "💻"}, {word: "りかしつ", meaning: "Lab IPA", icon: "🧪"}, {word: "びじゅつしつ", meaning: "Ruang Seni", icon: "🎨"}, {word: "おんがくしつ", meaning: "Ruang Musik", icon: "🎵"}, {word: "きょうし", meaning: "Guru", icon: "👨‍🏫"}, {word: "せいと", meaning: "Siswa", icon: "👨‍🎓"}, {word: "こうちょう", meaning: "Kepala Sekolah", icon: "👨‍💼"}, {word: "じむいん", meaning: "Staff TU", icon: "👩‍💻"}, {word: "けいびいん", meaning: "Satpam", icon: "👮"}, {word: "うえ", meaning: "Atas", icon: "⬆️"}, {word: "した", meaning: "Bawah", icon: "⬇️"}, {word: "まえ", meaning: "Depan", icon: "👀"}, {word: "うしろ", meaning: "Belakang", icon: "👤"}, {word: "なか", meaning: "Dalam", icon: "📦"}
+        ];
+
+        const polaKalimat = [
+            {title: "Pola 1", content: "<h3>S に 何 が ありますか？</h3><p>Menanyakan apa yang ada di suatu tempat</p><div style='background:#e3f2fd;padding:15px;margin:15px 0;border-radius:10px;'><strong>きょうしつ に 何 が ありますか？</strong><br><em>Apa yang ada di kelas?</em></div>"},
+            {title: "Pola 2", content: "<h3>S に KB が います/あります</h3><p>Menyatakan keberadaan orang/benda</p><div style='background:#e3f2fd;padding:15px;margin:15px 0;border-radius:10px;'><strong>きょうしつ に せいと が います。</strong><br><em>Di kelas ada siswa.</em></div>"},
+            {title: "Pola 3", content: "<h3>S は POSISI に あります</h3><p>Menunjukkan letak/posisi</p><div style='background:#e3f2fd;padding:15px;margin:15px 0;border-radius:10px;'><strong>ロッカー は きょうしつ の うしろ に あります。</strong><br><em>Loker ada di belakang kelas.</em></div>"}
+        ];
+
+        const questions = [
+            {question: "これは どこですか？", image: "img/library.png", options: ["しょくどう", "としょかん", "りかしつ", "じむしつ"], correct: 1},
+            {question: "きょうしつ に 何 が ありますか？", image: "img/classroom.png", options: ["コンピューター", "つくえ と いす", "せんせい", "テレビ"], correct: 1},
+            {question: "この人は だれですか？", image: "img/teacher.png", options: ["せいと", "きょうし", "じむいん", "けいびいん"], correct: 1},
+            {question: "アイティしつ に 何 が ありますか？", image: "img/computer_lab.png", options: ["ほん", "コンピューター", "ベッド", "たべもの"], correct: 1},
+            {question: "しょくどう で 何を しますか？", options: ["べんきょうします", "たべます", "およぎます", "ねます"], correct: 1},
+            {question: "としょかん に _______ が あります。", options: ["ほん", "たべもの", "くるま", "ベッド"], correct: 0},
+            {question: "たいいくかん で 何を しますか？", options: ["りょうり", "うんどう", "えを かく", "ほんを よむ"], correct: 1},
+            {question: "こうちょうしつ に _______ が います。", options: ["ほん", "つくえ", "こうちょう", "くるま"], correct: 2},
+            {question: "せいと は きょうしつ の まえ に います。", options: ["Siswa ada di belakang kelas", "Siswa ada di depan kelas", "Siswa ada di dalam kelas", "Siswa ada di atas kelas"], correct: 1},
+            {question: "ほけんしつ は どこに ありますか？", options: ["がっこう の となり", "がっこう の なか", "がっこう の そと", "がっこう の うえ"], correct: 1},
+            {question: "けいびいん は どこに いますか？", options: ["しょくどう", "けいびしつ", "としょかん", "りかしつ"], correct: 1},
+            {question: "びじゅつしつ で 何を しますか？", options: ["え を かきます", "うたを うたいます", "およぎます", "はしります"], correct: 0},
+            {question: "トイレ は がっこう の _______ に あります。", options: ["うえ", "した", "なか", "そと"], correct: 2},
+            {question: "ろうか は どこですか？", options: ["へや の なか", "へや と へや の あいだ", "がっこう の そと", "にわ"], correct: 1},
+            {question: "そうだんしつ で 何を しますか？", options: ["およぎます", "そうだんします", "りょうりします", "うんどうします"], correct: 1},
+            {question: "にかい は どういう意味ですか？", options: ["Lantai 1", "Lantai 2", "Lantai 3", "Basement"], correct: 1},
+            {question: "れいはいしつ で 何を しますか？", options: ["いのります", "およぎます", "べんきょうします", "たべます"], correct: 0},
+            {question: "そうこ に 何 が ありますか？", options: ["せいと", "たべもの", "どうぐ", "ほん"], correct: 2},
+            {question: "りかしつ で 何を しますか？", options: ["えを かきます", "じっけんします", "およぎます", "ねます"], correct: 1},
+            {question: "おんがくしつ で 何を しますか？", options: ["うたを うたいます", "えを かきます", "およぎます", "ねます"], correct: 0}
+        ];
+
+        let currentKosakata = 0, currentPola = 0, currentQuestion = 0, userAnswers = [], score = 0;
+
+        function showKosakata() { document.getElementById('main-menu').classList.add('hidden'); document.getElementById('kosakata-screen').classList.remove('hidden'); currentKosakata = 0; showKosakataItem(); }
+        function showPolaKalimat() { document.getElementById('main-menu').classList.add('hidden'); document.getElementById('pola-screen').classList.remove('hidden'); currentPola = 0; showPolaItem(); }
+        function showQuiz() { document.getElementById('main-menu').classList.add('hidden'); document.getElementById('quiz-screen').classList.remove('hidden'); currentQuestion = 0; userAnswers = []; score = 0; showQuestion(); }
+        function goToMainMenu() { document.querySelectorAll('.content').forEach(el => el.classList.add('hidden')); document.getElementById('main-menu').classList.remove('hidden'); }
+
+        function showKosakataItem() {
+            const item = kosakata[currentKosakata];
+            document.getElementById('kosakata-number').textContent = `Kosakata ${currentKosakata + 1} dari ${kosakata.length}`;
+            document.getElementById('kosakata-word').textContent = item.word;
+            document.getElementById('kosakata-meaning').textContent = item.meaning;
+            document.getElementById('kosakata-image').textContent = item.icon;
+            const progress = ((currentKosakata + 1) / kosakata.length) * 100;
+            document.getElementById('kosakata-progress').style.width = progress + '%';
+            document.getElementById('prev-kosakata').disabled = currentKosakata === 0;
+            document.getElementById('next-kosakata').textContent = currentKosakata === kosakata.length - 1 ? 'Selesai' : 'Selanjutnya';
+        }
+
+        function nextKosakata() { if (currentKosakata < kosakata.length - 1) { currentKosakata++; showKosakataItem(); } else { goToMainMenu(); } }
+        function previousKosakata() { if (currentKosakata > 0) { currentKosakata--; showKosakataItem(); } }
+
+        function showPolaItem() {
+            const item = polaKalimat[currentPola];
+            document.getElementById('pola-number').textContent = `Pola ${currentPola + 1} dari ${polaKalimat.length}`;
+            document.getElementById('pola-content').innerHTML = item.content;
+            const progress = ((currentPola + 1) / polaKalimat.length) * 100;
+            document.getElementById('pola-progress').style.width = progress + '%';
+            document.getElementById('prev-pola').disabled = currentPola === 0;
+            document.getElementById('next-pola').textContent = currentPola === polaKalimat.length - 1 ? 'Selesai' : 'Selanjutnya';
+        }
+
+        function nextPola() { if (currentPola < polaKalimat.length - 1) { currentPola++; showPolaItem(); } else { goToMainMenu(); } }
+        function previousPola() { if (currentPola > 0) { currentPola--; showPolaItem(); } }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            document.getElementById('question-number').textContent = `Pertanyaan ${currentQuestion + 1} dari ${questions.length}`;
+            document.getElementById('question').textContent = question.question;
+            
+            const imageElement = document.getElementById('question-image');
+            if (question.image) { imageElement.src = question.image; imageElement.classList.remove('hidden'); } else { imageElement.classList.add('hidden'); }
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + index)}</div><div>${option}</div>`;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('finish-btn').classList.toggle('hidden', currentQuestion !== questions.length - 1);
+            document.getElementById('next-btn').disabled = true;
+            
+            if (userAnswers[currentQuestion] !== undefined) { selectOption(userAnswers[currentQuestion]); }
+        }
+
+        function selectOption(index) {
+            document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
+            document.querySelectorAll('.option')[index].classList.add('selected');
+            userAnswers[currentQuestion] = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() { if (currentQuestion < questions.length - 1) { currentQuestion++; showQuestion(); } }
+        function previousQuestion() { if (currentQuestion > 0) { currentQuestion--; showQuestion(); } }
+
+        function finishQuiz() {
+            score = 0;
+            for (let i = 0; i < questions.length; i++) { if (userAnswers[i] === questions[i].correct) { score++; } }
+            showResults();
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('final-score').textContent = `${score}/${questions.length} (${percentage}%)`;
+            
+            const feedbackElement = document.getElementById('feedback');
+            if (percentage >= 80) {
+                feedbackElement.className = 'feedback excellent';
+                feedbackElement.innerHTML = '<h3>🌟 Sangat Baik!</h3><p>Anda memiliki pemahaman yang sangat baik tentang bahasa Jepang untuk lingkungan sekolah!</p>';
+            } else if (percentage >= 60) {
+                feedbackElement.className = 'feedback good';
+                feedbackElement.innerHTML = '<h3>👍 Baik!</h3><p>Pemahaman Anda cukup baik. Terus berlatih!</p>';
+            } else {
+                feedbackElement.className = 'feedback needs-improvement';
+                feedbackElement.innerHTML = '<h3>💪 Perlu Latihan Lebih</h3><p>Jangan menyerah! Pelajari kembali materi dan coba lagi.</p>';
+            }
+        }
+
+        function restartQuiz() { currentQuestion = 0; userAnswers = []; score = 0; document.getElementById('result-screen').classList.add('hidden'); document.getElementById('quiz-screen').classList.remove('hidden'); showQuestion(); }
+    </script>
 </body>
 </html>
